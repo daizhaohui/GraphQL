@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/daizhaohui/GraphQL#readme",
   "dependencies": {
+    "graphql": "^14.1.1",
     "graphql-tools": "^4.0.4",
-    "graphsql": "0.0.0"
   }
 }
