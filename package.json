@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/daizhaohui/GraphQL/issues"
   },
-  "homepage": "https://github.com/daizhaohui/GraphQL#readme"
+  "homepage": "https://github.com/daizhaohui/GraphQL#readme",
+  "dependencies": {
+    "graphql-tools": "^4.0.4",
+    "graphsql": "0.0.0"
+  }
 }
