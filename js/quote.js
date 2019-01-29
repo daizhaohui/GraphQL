@@ -1,6 +1,6 @@
 import React from "react";
-
-export default class Quote extends React.Component {
+import Relay from "react-relay/classic";
+class Quote extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -14,3 +14,9 @@ export default class Quote extends React.Component {
     );
   }
 }
+
+Quote = Relay.createContainer(Quote, {
+  fragments: {}
+});
+
+export default Quote;

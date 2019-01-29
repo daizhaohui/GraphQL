@@ -2,11 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Quote from "./quote";
 import "whatwg-fetch";
-
-class App extends React.Component {
+import Relay from "react-relay/classic";
+class QuotesLibrary extends React.Component {
   state = {
     allQuotes: []
   };
+
+  static defaultProps = { greeting: "Hello" };
 
   componentDidMount() {
     fetch(`/graphql?query={
@@ -34,6 +36,15 @@ class App extends React.Component {
   }
 }
 
-App.defaultProps = { greeting: "Hello" };
+QuotesLibrary = Relay.createContainer(QuotesLibrary, {
+  fragments: {}
+});
 
-ReactDOM.render(<App />, document.getElementById("appContainer"));
+class AppRoute extends Relay.Route {
+  static routeName = "App";
+}
+
+ReactDOM.render(
+  <Relay.RootContainer Component={QuotesLibrary} route={new AppRoute()} />,
+  document.getElementById("appContainer")
+);
