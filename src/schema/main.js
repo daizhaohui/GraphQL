@@ -5,6 +5,7 @@ const {
   GraphQLInt,
   GraphQLList
 } = require('graphql');
+const QuoteType = require('./QuoteType');
 
 const roll = () => Math.floor(6 * Math.random()) + 1;
 
@@ -38,6 +39,13 @@ const queryType = new GraphQLObjectType({
       }) => {
         return 3;
       }
+    },
+    allQuotes: {
+      type: new GraphQLList(QuoteType),
+      description: 'A list of the quotes in the database.',
+      resolve: (_, args, {
+        db
+      }) => db.collection('quotes').find().toArray()
     }
   }
 });
