@@ -36,9 +36,7 @@ const queryType = new GraphQLObjectType({
       type: GraphQLInt,
       resolve: (_, args, {
         db
-      }) => {
-        return 3;
-      }
+      }) => db.collection("users").count()
     },
     allQuotes: {
       type: new GraphQLList(QuoteType),

@@ -6,7 +6,8 @@ const schema = require('./schema/main');
 const {
   MongoClient
 } = require('mongodb');
-const MONGO_URL = 'mongodb://localhost:27017/test';
+const MONGO_URL = 'mongodb://localhost:27017';
+const DB_NAME = 'test';
 const assert = require('assert');
 const graphqlHttp = require('express-graphql');
 const express = require('express');
@@ -17,9 +18,10 @@ const rli = readline.createInterface({
   output: process.stdout
 });
 
-MongoClient.connect(MONGO_URL, (err, db) => {
+MongoClient.connect(MONGO_URL, (err, client) => {
   assert.equal(null, err);
   console.log('Connnected to MongoDB Server.')
+  const db = client.db(DB_NAME);
 
   app.use('/graphql', graphqlHttp({
     schema: schema,
