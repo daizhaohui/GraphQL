@@ -4,17 +4,16 @@ const {
   GraphQLString,
   GraphQLInt,
   GraphQLList
-} = require('graphql');
-const QuoteType = require('./QuoteType');
-
+} = require("graphql");
+const QuotesLibraryType = require("./QuotesLibraryType");
 const roll = () => Math.floor(6 * Math.random()) + 1;
 
 const queryType = new GraphQLObjectType({
-  name: 'RootQuery',
+  name: "RootQuery",
   fields: {
     hello: {
       type: GraphQLString,
-      resolve: () => 'world'
+      resolve: () => "world"
     },
     diceRoll: {
       type: new GraphQLList(GraphQLInt),
@@ -34,16 +33,12 @@ const queryType = new GraphQLObjectType({
     },
     usersCount: {
       type: GraphQLInt,
-      resolve: (_, args, {
-        db
-      }) => db.collection("users").count()
+      resolve: (_, args, { db }) => db.collection("users").count()
     },
-    allQuotes: {
-      type: new GraphQLList(QuoteType),
-      description: 'A list of the quotes in the database.',
-      resolve: (_, args, {
-        db
-      }) => db.collection('quotes').find().toArray()
+    quotesLibrary: {
+      type: QuotesLibraryType,
+      description: "The Quotes Library",
+      resolve: () => {}
     }
   }
 });

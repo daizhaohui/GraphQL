@@ -9,6 +9,20 @@ const graphqlHttp = require("express-graphql");
 const express = require("express");
 const app = express();
 
+//生成schema json
+const { introspectionQuery } = require("graphql/utilities");
+const fs = require("fs");
+const path = require("path");
+graphql(schema, introspectionQuery)
+  .then(result => {
+    fs.writeFileSync(
+      path.join(__dirname, "cache/schema.json"),
+      JSON.stringify(result, null, 2)
+    );
+    console.log("Generated cached schema.json file");
+  })
+  .catch(console.error);
+
 const rli = readline.createInterface({
   input: process.stdin,
   output: process.stdout
