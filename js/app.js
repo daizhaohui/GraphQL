@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Quote from "./quote";
 import "whatwg-fetch";
-import Relay from "react-relay/classic";
 class QuotesLibrary extends React.Component {
   state = {
     allQuotes: []
@@ -12,15 +11,17 @@ class QuotesLibrary extends React.Component {
 
   componentDidMount() {
     fetch(`/graphql?query={
-      allQuotes{
-        id,
-        text,
-        author
+      quotesLibrary{
+        allQuotes{
+          id,
+          text,
+          author
+        }
       }
     }`)
       .then(response => response.json())
       .then(json => {
-        this.setState({ allQuotes: json.data.allQuotes });
+        this.setState({ allQuotes: json.data.quotesLibrary.allQuotes });
       })
       .catch(ex => console.error(ex));
   }
@@ -36,15 +37,4 @@ class QuotesLibrary extends React.Component {
   }
 }
 
-QuotesLibrary = Relay.createContainer(QuotesLibrary, {
-  fragments: {}
-});
-
-class AppRoute extends Relay.Route {
-  static routeName = "App";
-}
-
-ReactDOM.render(
-  <Relay.RootContainer Component={QuotesLibrary} route={new AppRoute()} />,
-  document.getElementById("appContainer")
-);
+ReactDOM.render(<QuotesLibrary />, document.getElementById("appContainer"));

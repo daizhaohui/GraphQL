@@ -7,7 +7,7 @@ const {
 } = require("graphql");
 const QuotesLibraryType = require("./QuotesLibraryType");
 const roll = () => Math.floor(6 * Math.random()) + 1;
-
+const quotesLibrary = {};
 const queryType = new GraphQLObjectType({
   name: "RootQuery",
   fields: {
@@ -38,7 +38,7 @@ const queryType = new GraphQLObjectType({
     quotesLibrary: {
       type: QuotesLibraryType,
       description: "The Quotes Library",
-      resolve: () => {}
+      resolve: () => quotesLibrary
     }
   }
 });
