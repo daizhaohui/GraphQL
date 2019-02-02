@@ -1,10 +1,7 @@
-const {
-  GraphQLObjectType,
-  GraphQLString,
-} = require('graphql');
+const { GraphQLObjectType, GraphQLString } = require("graphql");
 
 const QuoteType = new GraphQLObjectType({
-  name: 'Quote',
+  name: "Quote",
   fields: {
     id: {
       type: GraphQLString,
